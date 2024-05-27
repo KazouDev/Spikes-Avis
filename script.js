@@ -2,6 +2,10 @@ const stars = document.querySelectorAll(".star");
 
 const reset = document.getElementById("reset");
 
+const rating_section = document.querySelector('.rating-section');
+
+const send = document.getElementById('send');
+
 var selected = false;
 
 stars.forEach((star, index) => {
@@ -36,6 +40,19 @@ const resetStar = () => {
 };
 
 reset.addEventListener("click", () => {
+  rating_section.classList.add('hide');
   selected = false;
-  stars.forEach((star) => star.classList.remove("selected", "disabled"));
+  setTimeout(() => {
+    stars.forEach((star) => star.classList.remove("selected", "disabled"));
+  }, 100);
+  setTimeout(() => {
+    rating_section.classList.remove('hide');
+  }, 200);
+});
+
+send.addEventListener('click', () => {
+  rating_section.classList.add('sended');
+  setTimeout(() => {
+    rating_section.remove();
+  }, 1000)
 });

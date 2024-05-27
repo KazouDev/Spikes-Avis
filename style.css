@@ -13,6 +13,7 @@ body {
   background-color: #7b61ff;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+    overflow-x: hidden;
 }
 
 .rating-section {
@@ -27,7 +28,44 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
+  transform: translateX(-1000%);
+  animation: rating-section-apparition 0.7s forwards;
 }
+
+.rating-section.hide {
+  animation: rating-section-hide 0.7s forwards;
+}
+
+.rating-section.sended {
+  animation: rating-section-sended 0.8s forwards;
+}
+
+@keyframes rating-section-apparition {
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes rating-section-hide {
+  from {
+    transform: translateX(0);
+  }
+  
+  to {
+    transform: translateX(-1000%);
+  }
+}
+
+@keyframes rating-section-sended {
+  from {
+    transform: translateX(0);
+  }
+  
+  to {
+    transform: translateX(1000%);
+  }
+}
+
 
 #reset {
   padding: 5px;
@@ -35,6 +73,30 @@ body {
   border: none;
   background-color: transparent;
   cursor: pointer;
+  transition: all 0.25s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+}
+
+#reset:hover {
+  background-color: rgba(26, 23, 39, 0.219);
+  transform: scale(1.1);
+}
+
+#send {
+  padding: 8px 16px;
+  background-color: #7b61ff;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+#send:hover {
+  background-color: rgba(123, 97, 255, 0.2);
 }
 
 .rating {
@@ -45,11 +107,15 @@ body {
 
 .star {
   position: relative;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+.star .bg {
   display: inline-block;
   transition: background-color 0.25s;
   border-radius: 50%;
   padding: 8px;
-  cursor: pointer;
 }
 
 .star.disabled {
@@ -65,8 +131,12 @@ body {
   fill: #7b61ff;
 }
 
-.star.current {
+.star.current .bg {
   background-color: rgba(123, 97, 255, 0.2);
+}
+
+.star.current {
+  transform: translateY(-5px);
 }
 
 .star svg {
